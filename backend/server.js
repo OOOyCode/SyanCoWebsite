@@ -19,9 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: [
+    "http://localhost:5173",
+    "https://frontend-ekou.onrender.com"
+  ],
   credentials: true
-}))
+}));
 
 app.use(cookieParser())
 app.use(express.json())
