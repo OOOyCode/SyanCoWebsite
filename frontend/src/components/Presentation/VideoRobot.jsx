@@ -7,7 +7,7 @@ function VideoRobot() {
       <div className="w-full max-w-4xl px-4">
         <div className="relative w-full overflow-hidden rounded-2xl border border-purple-800 shadow-2xl">
           
-          <video
+          {/* <video
             className="w-full h-auto"
             controls
             autoPlay
@@ -17,7 +17,7 @@ function VideoRobot() {
           >
             <source src={VideoRobotSyan} type="video/mp4" />
             Your browser does not support the video tag.
-          </video>
+          </video> */}
 
         </div>
 
