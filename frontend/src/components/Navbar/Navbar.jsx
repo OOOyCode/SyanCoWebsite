@@ -51,7 +51,7 @@ function Navbar() {
   border border-slate-700 bg-slate-900 px-6 py-4 rounded-full text-slate-200 text-sm"
     >
       <a href="/">
-        <img src={Logov6} alt="uwu" className="max-w-35" />
+        <img src={Logov6} alt="image not loaded" className="max-w-35" />
       </a>
 
       <NavbarCenterBtns user={user} />
