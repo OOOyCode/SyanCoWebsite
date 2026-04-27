@@ -11,7 +11,8 @@ function ManagePosts() {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [error, setError] = useState("");
 
-  // ✅ FETCH USER POSTS
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const fetchPosts = async () => {
     try {
       const res = await api.get("/post/my");
@@ -27,7 +28,6 @@ function ManagePosts() {
     fetchPosts();
   }, []);
 
-  // 🗑 DELETE POST
   const deletePost = async (id) => {
     try {
       await api.delete(`/post/delete/${id}`);
@@ -37,7 +37,6 @@ function ManagePosts() {
     }
   };
 
-  // 🖼 IMAGE CHANGE
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -47,7 +46,6 @@ function ManagePosts() {
     }
   };
 
-  // ➕ CREATE POST
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -137,7 +135,7 @@ function ManagePosts() {
                 {/* IMAGE */}
                 {post.ImageURL && (
                   <img
-                    src={`http://localhost:5000${post.ImageURL}`}
+                    src={`${BASE_URL}${post.ImageURL}`}
                     className="w-full h-40 object-cover rounded"
                   />
                 )}
