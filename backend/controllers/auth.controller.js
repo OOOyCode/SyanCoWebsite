@@ -113,8 +113,17 @@ export const login = async (req, res) => {
 
 // LOGOUT
 export const logout = (req, res) => {
-  res.clearCookie("token");
-  return res.json({ message: "Logged out" });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,      
+    sameSite: "none",  
+    path: "/",          
+    // domain: "frontend-ekou.onrender.com/",
+  });
+
+  return res.status(200).json({
+    message: "Logged out successfully",
+  });
 };
 
 // DELETE ACCOUNT
