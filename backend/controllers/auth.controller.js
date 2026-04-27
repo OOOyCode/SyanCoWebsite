@@ -36,7 +36,7 @@ export const register = async (req, res) => {
     }
 
     // Check password strength
-    if (password.lenght < 6) {
+    if (password.length < 6) {
       return res.status(400).json({ error: "Password must be at least 6 characters" });
     }
     if (!/\d/.test(password)) {
