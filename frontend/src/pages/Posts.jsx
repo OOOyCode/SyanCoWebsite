@@ -6,6 +6,8 @@ function Posts() {
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -89,7 +91,7 @@ function Posts() {
               <div className="w-full h-full rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-2xl p-4 flex flex-col justify-between">
                 
                 <img
-                  src={`http://localhost:5000${post.ImageURL}`}
+                  src={`${BASE_URL}${post.ImageURL}`}
                   className="w-full h-[300px] object-cover rounded-xl"
                 />
 
