@@ -1,5 +1,5 @@
 import React from "react";
-import Logov6NoBg from "../assets/Logov6NoBg.png";
+import Logov6NoBg from "../assets/Logos/Logov6NoBg.png";
 
 function Footer() {
   return (

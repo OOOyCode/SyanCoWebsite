@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Hero from "../components/Hero/Hero";
 import HeroProject from "../components/Presentation/HeroProject";
 import VideoRobot from "../components/Presentation/VideoRobot";
+import HeroTeam from "../components/Presentation/HeroTeam";
+import HeroCode from "../components/Presentation/HeroCode";
 
 const Home = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -31,7 +33,9 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <HeroTeam />
       <HeroProject />
+      <HeroCode />
       <VideoRobot />
     </>
   );

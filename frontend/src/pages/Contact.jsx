@@ -51,7 +51,7 @@ function Contact() {
         }
       `}</style>
 
-      <section className="relative bg-black flex flex-col md:flex-row justify-center px-4 py-20 gap-20">
+      <section className="relative bg-[#00A63E]/0 backdrop-blur-sm border border-white/10 flex flex-col md:flex-row justify-center px-4 py-20 gap-20">
 
         <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none mb-10 size-140 bg-blue-500/35 rounded-full blur-[200px]"></div>
 

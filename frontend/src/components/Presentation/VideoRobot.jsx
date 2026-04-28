@@ -1,5 +1,4 @@
 import React from "react";
-import VideoRobotSyan from "../../assets/syanVide.mp4"
 
 function VideoRobot() {
   return (
@@ -15,7 +14,6 @@ function VideoRobot() {
             loop
             playsInline
           >
-            <source src={VideoRobotSyan} type="video/mp4" />
             Your browser does not support the video tag.
           </video> */}
 

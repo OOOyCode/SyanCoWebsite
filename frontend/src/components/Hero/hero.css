@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Protest+Revolution&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Protest+Revolution&display=swap');
+
+.syan {
+  font-family: "Protest Revolution", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.s {
+  font-family: "Protest Revolution", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 120px;
+}
+
+.sub {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  position: relative;
+}
+
+.sub::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  width: 100%;
+  height: 6px;
+  background: #020024;
+  background: linear-gradient(90deg,rgb(208, 0, 255) 0%, rgb(88, 10, 136) 35%, rgb(0, 0, 0) 100%);
+  transform: translateY(-50%);
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 30%,
+    0% 100%
+  );
+}
+.sub::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 110%;
+  width: 100%;
+  height: 6px;
+  background: #020024;
+  background: linear-gradient(90deg,rgb(208, 0, 255) 0%, rgb(88, 10, 136) 35%, rgb(0, 0, 0) 100%);
+  transform: translateY(-50%) rotate(180deg);
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 30%,
+    0% 100%
+  );
+}
+
+.subsub {
+    font-family: "Marck Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.607);
+}

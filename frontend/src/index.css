@@ -1,12 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+      
 @import "tailwindcss";
 
 body {
-  @apply bg-black;
+  margin: 0;
   font-family: 'Inter', sans-serif;
+  position: relative;
+  min-height: 100vh;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
 
+  background-image: url("./assets/Body/bg1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  filter: contrast(2) blur(0px) brightness(0.8);
+  
+  z-index: -1;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.4); /* 👈 controls darkness */
+
+  z-index: -1;
+}
+
+/* Hero */
 .line {
   font-family: "Dancing Script", cursive;
   font-size: 48px;
@@ -18,11 +47,46 @@ body {
 
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: draw 3s ease forwards;
+  animation: draw 5s ease forwards;
 }
 
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Navbar */
+
+.centerbtn {
+  font-family: "Noto sans", sans-serif;
+}
+
+
+/* Animation Basic */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.9s ease forwards;
+}
+.animate-fadeIn11 {
+  animation: fadeIn 1.1s ease forwards;
+}
+.animate-fadeIn05 {
+  animation: fadeIn 0.7s ease forwards;
+}
+.animate-fadeIn03 {
+  animation: fadeIn 0.5s ease forwards;
+}
+.animate-fadeIn01 {
+  animation: fadeIn 0.3s ease forwards;
 }

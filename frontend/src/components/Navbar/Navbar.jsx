@@ -1,15 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../api/axios";
 import { useState, useEffect } from "react";
-import Logov1 from "../../assets/Logov1.png";
-import Logov2 from "../../assets/Logov2.png";
-import Logov3 from "../../assets/Logov3.png";
-import Logov4 from "../../assets/Logov4.png";
-import Logov5 from "../../assets/Logov5.png";
-import Logov6 from "../../assets/Logov6.png";
+import Logov6 from "../../assets/Logos/Logov6NoBg.png";
 import NavbarCenterBtns from "./NavbarCenterBtns";
 import NavbarMobile from "./NavbarMobile";
 import NavbarSide from "./NavbarSide";
+import "./navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -18,11 +14,10 @@ function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // CHECK AUTH
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get("/auth/me"); // backend endpoint needed
+        const res = await api.get("/auth/me");
         setUser(res.data);
       } catch (err) {
         setUser(null);
@@ -34,7 +29,6 @@ function Navbar() {
     fetchUser();
   }, [navigate]);
 
-  // LOGOUT
   const handleLogout = async () => {
     try {
       await api.post("/auth/logout");
@@ -47,8 +41,8 @@ function Navbar() {
 
   return (
     <nav
-      class="flex items-center mx-4 max-md:w-full max-md:justify-between justify-between
-  border border-slate-700 bg-slate-900 px-6 py-4 rounded-full text-slate-200 text-sm"
+      class="flex items-center mx-4 my-1 max-md:w-full max-md:justify-between justify-between
+       px-6 py-1 rounded-3xl text-white bg-[#00A63E]/0 backdrop-blur-sm border border-white/10 text-sm navbar"
     >
       <a href="/">
         <img src={Logov6} alt="image not loaded" className="max-w-35" />
@@ -58,8 +52,13 @@ function Navbar() {
 
       <NavbarSide user={user} handleLogout={handleLogout} />
 
-      {/* Mobile Toggle */}
-      <NavbarMobile user={user} menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} handleLogout={handleLogout} />
+      <NavbarMobile
+        user={user}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        navigate={navigate}
+        handleLogout={handleLogout}
+      />
     </nav>
   );
 }

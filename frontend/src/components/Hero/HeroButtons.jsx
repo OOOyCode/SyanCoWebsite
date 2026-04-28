@@ -41,9 +41,8 @@ function HeroButtons() {
   return (
     <div
       ref={sectionRef}
-      className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8 md:px-0 mt-14"
+      className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8 md:px-0 mt-14 mb-20"
     >
-      {/* CARD 1 */}
       <div className={`${cardBase} ${visible ? shown : hidden}`}>
         <div className="flex items-start justify-between">
           <img
@@ -61,7 +60,6 @@ function HeroButtons() {
         </p>
       </div>
 
-      {/* CARD 2 */}
       <div className={`${cardBase} ${visible ? shown : hidden}`}>
         <img
           className="w-12 h-12 bg-white p-1.5 rounded-2xl"

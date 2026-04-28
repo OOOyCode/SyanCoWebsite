@@ -1,19 +1,19 @@
-import React from 'react'
+import React from "react";
 
-function NavbarCenterBtns({user}) {
+function NavbarCenterBtns({ user }) {
   return (
     <div>
       {user ? (
-        <div class="hidden md:flex items-center gap-6 ml-7">
-          <a href="/posts" class="relative overflow-hidden h-6 group">
-            <span class="block group-hover:-translate-y-full transition-transform duration-300">
+        <div className="hidden bg-blue-400/10 md:flex items-center gap-6 ml-7 centerbtn border p-3 rounded-2xl">
+          <a href="/posts" className="relative overflow-hidden h-6 group">
+            <span className="block group-hover:-translate-y-full transition-transform duration-300 ">
               Posts
             </span>
             <span class="block absolute top-full left-0 group-hover:-translate-y-full transition-transform duration-300 text-slate-400">
               Posts
             </span>
           </a>
-
+ 
           <a href="/create-post" class="relative overflow-hidden h-6 group">
             <span class="block group-hover:-translate-y-full transition-transform duration-300">
               Create Posts
@@ -42,8 +42,8 @@ function NavbarCenterBtns({user}) {
           </a>
         </div>
       ) : (
-        <div class="hidden md:flex items-center gap-6 ml-7">
-            <a href="/posts" class="relative overflow-hidden h-6 group">
+        <div class="hidden bg-blue-400/10 md:flex items-center gap-6 ml-7 centerbtn border p-3 rounded-2xl">
+          <a href="/posts" class="relative overflow-hidden h-6 group">
             <span class="block group-hover:-translate-y-full transition-transform duration-300">
               Posts
             </span>
@@ -71,7 +71,7 @@ function NavbarCenterBtns({user}) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default NavbarCenterBtns
+export default NavbarCenterBtns;
