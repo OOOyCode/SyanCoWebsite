@@ -1,104 +1,145 @@
-import React from 'react'
-import Robot from "../../assets/robot.png"
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Robot from "../../assets/robot.png";
 
 function HeroProject() {
+  const [text, setText] = useState("");
+  const fullText = "Voici notre robot ainsi que ses fonctionnalités.";
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setText(fullText.slice(0, i));
+      i++;
+      if (i > fullText.length) clearInterval(interval);
+    }, 25);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const features = [
+    "Une IA capable de se repérer dans l’espace",
+    "Vitesse moyenne optimisée",
+    "Facile d’utilisation et sécurisé",
+  ];
+
+  const specs = [
+    "Calcul automatique des positions",
+    "Suivi de trajectoires avancé",
+    "Création de dessins autonomes",
+    "Interface écran intégrée",
+    "Modes et outils personnalisables",
+  ];
+
   return (
-    <section className="flex flex-col md:flex-row gap-14 items-start justify-between max-w-7xl mx-auto px-4 p-10 bg-gradient-to-b from-[#3B006E] to-[#050146]">
-            <div className="max-w-sm">
-                <p className="mt-4 text-sm/6 text-gray-500">
-                    Voici notre robot ainsi que ses fonctionnalitées.
-                </p>
+    <motion.section
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="relative flex flex-col md:flex-row gap-14 items-start justify-between max-w-7xl mx-auto px-4 p-10 
+      bg-gradient-to-b from-white to-[#01494e]/10 backdrop-blur-sm border border-white/10 text-sm text-gray-800 overflow-hidden"
+    >
 
-                <img src={Robot} alt="" />
+      {/* ✨ LIGHT GLOW BACKGROUND EFFECT */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-cyan-400/20 blur-3xl rounded-full" />
+        <div className="absolute bottom-10 right-10 w-72 h-72 bg-indigo-500/20 blur-3xl rounded-full" />
+      </div>
 
+      {/* LEFT */}
+      <div className="relative max-w-sm z-10">
 
-                <div className="mt-8 space-y-4">
-                    <div className="flex items-center gap-3 text-gray-500">
-                        <div className="p-2.5 border border-gray-200 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles size-5" aria-hidden="true" >
-                                <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
-                                <path d="M20 2v4"></path>
-                                <path d="M22 4h-4"></path>
-                                <circle cx="4" cy="20" r="2"></circle>
-                            </svg>
-                        </div>
-                        <p>Une IA capable de se repérer dans l'espace</p>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-500">
-                        <div className="p-2.5 border border-gray-200 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-zap size-5" aria-hidden="true" >
-                                <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-                            </svg>
-                        </div>
-                        <p>Vitesse Moyenne</p>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-500">
-                        <div className="p-2.5 border border-gray-200 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield-check size-5" aria-hidden="true" >
-                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                                <path d="m9 12 2 2 4-4"></path>
-                            </svg>
-                        </div>
-                        <p>Facile d'utilisation</p>
-                    </div>
+        <p className="mt-4 text-sm/6 text-gray-500">
+          {text}
+        </p>
+
+        {/* ROBOT (3D HOVER) */}
+        <motion.img
+          src={Robot}
+          alt="robot"
+          initial={{ scale: 0.85, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          whileHover={{ rotateX: 8, rotateY: -8, scale: 1.05 }}
+          transition={{ duration: 0.6 }}
+          className="mt-6 transition-transform drop-shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+        />
+
+        {/* FEATURES */}
+        <div className="mt-8 space-y-4">
+
+          {features.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition"
+            >
+              <div className="p-2 rounded-md bg-gradient-to-r from-cyan-500 to-indigo-500 text-white shadow-md">
+                ⚙
+              </div>
+              <p className="text-sm">{item}</p>
+            </motion.div>
+          ))}
+
+        </div>
+      </div>
+
+      {/* RIGHT */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 flex flex-wrap items-end justify-center gap-10 w-full"
+      >
+
+        {/* CARD */}
+        <div className="group w-full max-w-85 rounded-2xl p-6 pb-10 
+        bg-white/80 backdrop-blur-xl border border-white/30
+        shadow-[0_10px_50px_rgba(0,0,0,0.15)]
+        hover:shadow-[0_20px_80px_rgba(0,255,255,0.15)]
+        transition duration-500
+        hover:-translate-y-2 hover:rotate-[0.5deg]">
+
+          {/* HEADER */}
+          <div className="text-center">
+            <h3 className="text-lg font-semibold">Plan</h3>
+            <p className="text-gray-500">
+              Parfait pour de petits usages simples
+            </p>
+
+            <p className="mt-4 text-2xl font-semibold">
+              Fait en 3 <span className="text-sm font-normal text-gray-500">semaines</span>
+            </p>
+          </div>
+
+          {/* LIST */}
+          <div className="mt-6 flex flex-col">
+
+            {specs.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="flex items-center gap-2 border-b py-3 border-gray-200/70
+                hover:bg-gradient-to-r hover:from-cyan-50 hover:to-indigo-50
+                transition rounded-md px-2"
+              >
+                <div className="rounded-full p-1 bg-gradient-to-r from-cyan-500 to-indigo-500 text-white text-xs shadow-md">
+                  ✓
                 </div>
-            </div>
-            <div className="flex flex-wrap items-end justify-center gap-10 w-full">
-                <div className="group w-full max-w-85 rounded-xl p-6 pb-10 bg-white border border-slate-200">
-                    <div className="flex flex-col items-center justify-center text-center">
-                        <h3 className="text-lg font-semibold">Plan</h3>
-                        <p className="text-gray-500">Parfait pour de petits usages simples</p>
-                        <p className="mt-4 text-2xl font-semibold">
-                            Fait en 3 <span className="text-sm font-normal text-gray-500">semaines</span>
-                        </p>
-                    </div>
-                    <div className="mt-2 flex flex-col">
-                        <div className="flex items-center gap-2 border-b py-3 border-gray-200">
-                            <div className="rounded-full p-1 bg-gray-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check size-3 text-white" aria-hidden="true" >
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                            </div>
-                            Calcul automatique des positions
-                        </div>
-                        <div className="flex items-center gap-2 border-b py-3 border-gray-200">
-                            <div className="rounded-full p-1 bg-gray-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check size-3 text-white" aria-hidden="true" >
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                            </div>
-                            IA capable de suivre des trajectoires données à la main.
-                        </div>
-                        <div className="flex items-center gap-2 border-b py-3 border-gray-200">
-                            <div className="rounded-full p-1 bg-gray-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check size-3 text-white" aria-hidden="true" >
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                            </div>
-                            Crée ses propres dessins
-                        </div>
-                        <div className="flex items-center gap-2 border-b py-3 border-gray-200">
-                            <div className="rounded-full p-1 bg-gray-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check size-3 text-white" aria-hidden="true" >
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                            </div>
-                            Petit écran pour interactions
-                        </div>
-                        <div className="flex items-center gap-2 border-b py-3 border-gray-200">
-                            <div className="rounded-full p-1 bg-gray-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check size-3 text-white" aria-hidden="true" >
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                            </div>
-                            Possibilité de changer de modes et d'outils
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-  )
+                {item}
+              </motion.div>
+            ))}
+
+          </div>
+        </div>
+
+      </motion.div>
+    </motion.section>
+  );
 }
 
-export default HeroProject
+export default HeroProject;

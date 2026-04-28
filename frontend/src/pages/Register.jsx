@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { api } from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import "./auth.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -37,62 +38,61 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  text-white">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-gray-900 p-6 rounded-xl shadow-lg space-y-4"
-      >
-        <h2 className="text-2xl font-bold text-center">Create account</h2>
+    <div className="min-h-screen flex items-center justify-center ">
+
+      <div className="container">
+
+        <div className="heading">Create Account</div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500 text-red-400 p-2 rounded text-sm">
+          <div style={{ color: "red", fontSize: "12px", textAlign: "center" }}>
             {error}
           </div>
         )}
 
-        <input
-          name="username"
-          placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
-          className="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500"
-        />
+        <form className="form" onSubmit={handleSubmit}>
 
-        <input
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500"
-        />
+          <input
+            required
+            className="input"
+            name="username"
+            placeholder="Username"
+            value={form.username}
+            onChange={handleChange}
+          />
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500"
-        />
+          <input
+            required
+            className="input"
+            name="email"
+            type="email"
+            placeholder="E-mail"
+            value={form.email}
+            onChange={handleChange}
+          />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 transition p-3 rounded font-semibold disabled:opacity-50"
-        >
-          {loading ? "Creating account..." : "Register"}
-        </button>
+          <input
+            required
+            className="input"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+          />
 
-        <p className="text-sm text-gray-400 text-center">
-          Already have an account?{" "}
-          <span
-            onClick={() => navigate("/login")}
-            className="text-indigo-400 cursor-pointer hover:underline"
-          >
-            Login
+          <span className="forgot-password">
+            <a href="login">Already have an account ?</a>
           </span>
-        </p>
-      </form>
+
+          <input
+            className="login-button"
+            type="submit"
+            value={loading ? "Creating..." : "Sign Up"}
+          />
+        </form>
+
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { api } from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
+import "./auth.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,8 +29,6 @@ function Login() {
 
     try {
       await api.post("/auth/login", form);
-
-      // login success → go to home/dashboard
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
@@ -39,68 +38,76 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  text-white">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-gray-900 p-6 rounded-xl shadow-lg space-y-4"
-      >
-        <GoogleLogin
-          onSuccess={async (credentialResponse) => {
-            try {
-              await api.post("/auth/google", {
-                credential: credentialResponse.credential,
-              });
+    <div className="min-h-screen flex items-center justify-center text-black">
 
-              navigate("/");
-            } catch (err) {
-              console.error(err);
-              setError("Google login failed");
-            }
-          }}
-          onError={() => {
-            console.log("Login Failed");
-            setError("Google login failed");
-          }}
-        />
-        <h2 className="text-2xl font-bold text-center">Login</h2>
+      <div className="container">
+
+        <div className="heading">Sign In</div>
+
         {error && (
-          <div className="bg-red-500/10 border border-red-500 text-red-400 p-2 rounded text-sm">
+          <div style={{ color: "red", fontSize: "12px", textAlign: "center" }}>
             {error}
           </div>
         )}
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 transition p-3 rounded font-semibold disabled:opacity-50"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-        <p className="text-sm text-gray-400 text-center">
-          Don't have an account?{" "}
-          <span
-            onClick={() => navigate("/register")}
-            className="text-indigo-400 cursor-pointer hover:underline"
-          >
-            Register
+
+        {/* FORM */}
+        <form className="form" onSubmit={handleSubmit}>
+
+          <input
+            required
+            className="input"
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            value={form.email}
+            onChange={handleChange}
+          />
+
+          <input
+            required
+            className="input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+          />
+
+          <span className="forgot-password">
+            <a href="#">Forgot Password ?</a>
           </span>
-        </p>
-      </form>
+
+          <input
+            className="login-button"
+            type="submit"
+            value={loading ? "Loading..." : "Sign In"}
+          />
+        </form>
+
+        {/* SOCIAL */}
+        <div className="social-account-container">
+
+          <div className="social-accounts">
+
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                try {
+                  await api.post("/auth/google", {
+                    credential: credentialResponse.credential,
+                  });
+                  navigate("/");
+                } catch {
+                  setError("Google login failed");
+                }
+              }}
+              onError={() => setError("Google login failed")}
+            />
+
+          </div>
+        </div>
+
+
+      </div>
     </div>
   );
 }
