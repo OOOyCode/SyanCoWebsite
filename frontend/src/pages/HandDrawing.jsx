@@ -28,7 +28,6 @@ function HandDrawing() {
     canvas.width = 640;
     canvas.height = 480;
 
-    // stop previous camera safely
     if (cameraRef.current) {
       cameraRef.current.stop?.();
       cameraRef.current = null;
@@ -88,7 +87,6 @@ function HandDrawing() {
         let x = index.x * canvas.width;
         let y = index.y * canvas.height;
 
-        // smoothing (important for fast movement)
         const prev = prevPoint.current;
 
         if (prev.x !== null) {
@@ -96,9 +94,6 @@ function HandDrawing() {
           y = prev.y * 0.6 + y * 0.4;
         }
 
-        // =========================
-        // 🧽 ERASER (REAL DELETE)
-        // =========================
         if (mode === "erase") {
           strokes.current = strokes.current.filter((s) => {
             const d = distanceToSegment(
@@ -113,9 +108,6 @@ function HandDrawing() {
           });
         }
 
-        // =========================
-        // ✏️ DRAW MODE
-        // =========================
         if (mode === "draw") {
           if (prev.x !== null) {
             strokes.current.push({
@@ -129,16 +121,12 @@ function HandDrawing() {
 
         prevPoint.current = { x, y };
 
-        // yellow finger cursor
         ctx.fillStyle = "yellow";
         ctx.beginPath();
         ctx.arc(x, y, 7, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // =========================
-      // redraw strokes (important)
-      // =========================
       for (const s of strokes.current) {
         ctx.strokeStyle = s.color;
         ctx.lineWidth = s.width;
@@ -149,7 +137,6 @@ function HandDrawing() {
         ctx.stroke();
       }
 
-      // frame border (optional)
       ctx.strokeStyle = "red";
       ctx.lineWidth = 2;
       ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -173,7 +160,6 @@ function HandDrawing() {
     };
   }, [mode, color]);
 
-  // clear everything
   const clearCanvas = () => {
     strokes.current = [];
     const canvas = canvasRef.current;
@@ -181,7 +167,6 @@ function HandDrawing() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
-  // save image
   const saveImage = () => {
     const canvas = canvasRef.current;
     const link = document.createElement("a");
@@ -193,7 +178,6 @@ function HandDrawing() {
   return (
     <div className="relative w-[640px] h-[480px] mx-auto bg-black">
 
-      {/* CAMERA */}
       <video
         ref={videoRef}
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -201,13 +185,11 @@ function HandDrawing() {
         playsInline
       />
 
-      {/* DRAW LAYER */}
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full z-10"
       />
 
-      {/* CONTROLS */}
       <div className="absolute bottom-[-90px] flex gap-2 flex-wrap justify-center w-full z-50">
 
         <button onClick={() => setMode("draw")} className="bg-green-600 px-2">
