@@ -17,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get("/auth/me"); // backend endpoint needed
+        const res = await api.get("/auth/me"); 
         setUser(res.data);
       } catch (err) {
         setUser(null);
