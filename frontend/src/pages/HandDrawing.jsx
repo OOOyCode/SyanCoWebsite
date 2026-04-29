@@ -190,7 +190,7 @@ function HandDrawing() {
         className="absolute top-0 left-0 w-full h-full z-10"
       />
 
-      <div className="absolute bottom-[-90px] flex gap-2 flex-wrap justify-center w-full z-50">
+      <div className="absolute flex gap-2 flex-wrap justify-center w-full z-50">
 
         <button onClick={() => setMode("draw")} className="bg-green-600 px-2">
           Draw
