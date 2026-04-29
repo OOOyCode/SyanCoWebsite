@@ -9,10 +9,10 @@ import "./hero.css"
 function Hero() {
   return (
     <section className="flex flex-col items-center  text-white px-4 pb-10">
-      <HeroImages />
+      {/* <HeroImages /> */}
 
       <h1 className="text-[42px]/1 font-semibold text-center max-w-[840px] mt-4 bg-gradient-to-r from-white to-[#00529f] text-transparent bg-clip-text ">
-        <span className="text-[82px]/24 " >LE <span className="syan bg-gradient-to-r from-white to-[#7686e1]  text-transparent bg-clip-text"><span className="s">S</span>yan</span><span>Inator.</span></span> <br />
+        <span className="text-[62px]/24 " >LE <span className="syan bg-gradient-to-r from-white to-[#7686e1]  text-transparent bg-clip-text"><span className="s">S</span>yan</span><span>Inator</span></span> <br />
         <span className="text-[12px]/11 bg-gradient-to-r from-[#a3bff0] to-[#e176dd]  text-transparent bg-clip-text sub"><span>Informatique</span> - <span>Ingénierie</span> - <span>Robotique</span></span> <br />
         <span className="text-[32px]/13 subsub">Pour tous les tableaux.</span>
       </h1>

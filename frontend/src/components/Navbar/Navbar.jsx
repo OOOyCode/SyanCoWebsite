@@ -7,7 +7,7 @@ import NavbarMobile from "./NavbarMobile";
 import NavbarSide from "./NavbarSide";
 import "./navbar.css";
 
-function Navbar() {
+function Navbar({}) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -52,13 +52,6 @@ function Navbar() {
 
       <NavbarSide user={user} handleLogout={handleLogout} />
 
-      <NavbarMobile
-        user={user}
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-        navigate={navigate}
-        handleLogout={handleLogout}
-      />
     </nav>
   );
 }

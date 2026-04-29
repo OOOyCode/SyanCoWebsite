@@ -28,7 +28,6 @@ function HandDrawing() {
     canvas.width = 640;
     canvas.height = 480;
 
-    // stop previous camera safely
     if (cameraRef.current) {
       cameraRef.current.stop?.();
       cameraRef.current = null;
@@ -88,7 +87,6 @@ function HandDrawing() {
         let x = index.x * canvas.width;
         let y = index.y * canvas.height;
 
-        // smoothing (important for fast movement)
         const prev = prevPoint.current;
 
         if (prev.x !== null) {
@@ -96,9 +94,6 @@ function HandDrawing() {
           y = prev.y * 0.6 + y * 0.4;
         }
 
-        // =========================
-        // 🧽 ERASER (REAL DELETE)
-        // =========================
         if (mode === "erase") {
           strokes.current = strokes.current.filter((s) => {
             const d = distanceToSegment(
@@ -107,15 +102,12 @@ function HandDrawing() {
               s.from.x,
               s.from.y,
               s.to.x,
-              s.to.y
+              s.to.y,
             );
             return d > 15; // erase radius
           });
         }
 
-        // =========================
-        // ✏️ DRAW MODE
-        // =========================
         if (mode === "draw") {
           if (prev.x !== null) {
             strokes.current.push({
@@ -129,16 +121,12 @@ function HandDrawing() {
 
         prevPoint.current = { x, y };
 
-        // yellow finger cursor
         ctx.fillStyle = "yellow";
         ctx.beginPath();
         ctx.arc(x, y, 7, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // =========================
-      // redraw strokes (important)
-      // =========================
       for (const s of strokes.current) {
         ctx.strokeStyle = s.color;
         ctx.lineWidth = s.width;
@@ -149,7 +137,6 @@ function HandDrawing() {
         ctx.stroke();
       }
 
-      // frame border (optional)
       ctx.strokeStyle = "red";
       ctx.lineWidth = 2;
       ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -173,7 +160,6 @@ function HandDrawing() {
     };
   }, [mode, color]);
 
-  // clear everything
   const clearCanvas = () => {
     strokes.current = [];
     const canvas = canvasRef.current;
@@ -181,7 +167,6 @@ function HandDrawing() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
-  // save image
   const saveImage = () => {
     const canvas = canvasRef.current;
     const link = document.createElement("a");
@@ -192,8 +177,6 @@ function HandDrawing() {
 
   return (
     <div className="relative w-[640px] h-[480px] mx-auto bg-black">
-
-      {/* CAMERA */}
       <video
         ref={videoRef}
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -201,47 +184,83 @@ function HandDrawing() {
         playsInline
       />
 
-      {/* DRAW LAYER */}
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full z-10"
       />
 
-      {/* CONTROLS */}
-      <div className="absolute bottom-[-90px] flex gap-2 flex-wrap justify-center w-full z-50">
-
-        <button onClick={() => setMode("draw")} className="bg-green-600 px-2">
+      <div className="absolute flex flex-wrap gap-2 p-2 bg-[#0a0a12] rounded-xl border border-violet-500/30 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+        <button
+          onClick={() => setMode("draw")}
+          className="px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white
+               border border-violet-300/30 shadow-[0_0_10px_rgba(168,85,247,0.5)]
+               hover:scale-105 transition"
+        >
           Draw
         </button>
 
-        <button onClick={() => setMode("erase")} className="bg-yellow-600 px-2">
+        <button
+          onClick={() => setMode("erase")}
+          className="px-3 py-1 rounded-md bg-gradient-to-r from-amber-500 to-yellow-400 text-black
+               border border-yellow-200/40 shadow-[0_0_10px_rgba(250,204,21,0.4)]
+               hover:scale-105 transition"
+        >
           Erase
         </button>
 
-        <button onClick={() => setMode("view")} className="bg-gray-600 px-2">
+        <button
+          onClick={() => setMode("view")}
+          className="px-3 py-1 rounded-md bg-gradient-to-r from-slate-600 to-slate-800 text-white
+               border border-slate-400/30 shadow-[0_0_10px_rgba(148,163,184,0.25)]
+               hover:scale-105 transition"
+        >
           View
         </button>
 
-        <button onClick={clearCanvas} className="bg-red-600 px-2">
+        <button
+          onClick={clearCanvas}
+          className="px-3 py-1 rounded-md bg-gradient-to-r from-red-600 to-rose-700 text-white
+               border border-red-300/30 shadow-[0_0_10px_rgba(239,68,68,0.4)]
+               hover:scale-105 transition"
+        >
           Clear
         </button>
 
-        <button onClick={saveImage} className="bg-blue-600 px-2">
+        <button
+          onClick={saveImage}
+          className="px-3 py-1 rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 text-white
+               border border-cyan-300/30 shadow-[0_0_10px_rgba(34,211,238,0.4)]
+               hover:scale-105 transition"
+        >
           Save
         </button>
 
-        <button onClick={() => setColor("white")} className="bg-white text-black px-2">
+        <button
+          onClick={() => setColor("white")}
+          className="px-3 py-1 rounded-md bg-white text-black
+               border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.4)]
+               hover:scale-105 transition"
+        >
           White
         </button>
 
-        <button onClick={() => setColor("red")} className="bg-red-500 px-2">
+        <button
+          onClick={() => setColor("red")}
+          className="px-3 py-1 rounded-md bg-red-500 text-white
+               border border-red-300/30 shadow-[0_0_10px_rgba(239,68,68,0.4)]
+               hover:scale-105 transition"
+        >
           Red
         </button>
 
-        <button onClick={() => setColor("blue")} className="bg-blue-500 px-2">
+        <button
+          onClick={() => setColor("blue")}
+          className="px-3 py-1 rounded-md bg-blue-500 text-white
+               border border-blue-300/30 shadow-[0_0_10px_rgba(59,130,246,0.4)]
+               hover:scale-105 transition"
+        >
           Blue
         </button>
-
       </div>
     </div>
   );

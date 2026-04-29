@@ -1,11 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function NavbarMobile({ user, menuOpen, setMenuOpen, navigate, handleLogout }) {
   return (
-    <>
+    <div className="fixed top-2 left-10/12 w-full z-[999999]">
+
+      {/* HAMBURGER */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="md:hidden text-slate-300"
+        className="md:hidden text-violet-200 p-3"
       >
         <svg
           className="w-6 h-6"
@@ -17,102 +22,89 @@ function NavbarMobile({ user, menuOpen, setMenuOpen, navigate, handleLogout }) {
         </svg>
       </button>
 
-      {!user ? (
-        <div
-          className={`
-  fixed top-24 left-1/2 -translate-x-1/2
-  w-[90%] md:w-1/2
-  h-auto
+      {/* MENU */}
+      <div
+        className={`
+          fixed top-20 left-1/2 -translate-x-1/2
+          w-[92%] max-w-md
 
-  z-[9999]
+          flex flex-col items-center gap-4 py-6
 
-  bg-slate-900/40 backdrop-blur-2xl
-  border border-white/10
-  shadow-2xl
+          rounded-2xl
+          bg-[#0b0b14]/90 backdrop-blur-2xl
+          border border-violet-500/20
+          shadow-[0_0_40px_rgba(139,92,246,0.2)]
 
-  rounded-2xl
+          transition-all duration-300 ease-in-out
 
-  flex flex-col items-center gap-4 py-6 text-slate-200
+          ${menuOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+          }
+        `}
+      >
 
-  transition-all duration-300 ease-in-out
+        {/* ALWAYS VISIBLE LINKS */}
+        <a className="text-violet-200 hover:text-white" href="/posts">
+          Posts
+        </a>
 
-  md:hidden
+        <a className="text-violet-200 hover:text-white" href="/contact">
+          Contact
+        </a>
 
-  ${
-    menuOpen
-      ? "opacity-100 translate-y-0 visible"
-      : "opacity-0 translate-y-5 invisible pointer-events-none"
-  }
-`}
-        >
-          <a className="hover:text-white transition" href="/posts">
-            Posts
-          </a>
-          <a className="hover:text-white transition" href="/contact">
-            Contact
-          </a>
-          <a className="hover:text-white transition" href="#">
-            Docs
-          </a>
 
-          <button
-            onClick={() => navigate("/register")}
-            className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition"
-          >
-            Sign Up
-          </button>
+        {!user ? (
+          <>
+            {/* NOT LOGGED IN */}
+            <button
+              onClick={() => navigate("/register")}
+              className="px-4 py-2 rounded-full
+                         bg-gradient-to-r from-violet-600 to-fuchsia-600
+                         text-white"
+            >
+              Sign In
+            </button>
 
-          <button
-            onClick={() => navigate("/login")}
-            className="bg-slate-100 text-black hover:bg-white px-4 py-2 rounded-full text-sm font-medium transition"
-          >
-            Sign In
-          </button>
-        </div>
-      ) : (
-        <div
-          className={`
-    absolute top-24 left-0 w-full
-    bg-slate-900/90 backdrop-blur-xl
-    border-t border-slate-800
-    flex flex-col items-center gap-4 py-6 text-slate-300
-    transition-all duration-300 ease-in-out
-    md:hidden
-    ${menuOpen ? "opacity-100 translate-x-0 visible" : "opacity-0 translate-x-50 invisible pointer-events-none"}
-  `}
-        >
-          <a className="hover:text-white transition" href="/posts">
-            Posts
-          </a>
-          <a className="hover:text-white transition" href="/create-post">
-            Create Posts
-          </a>
-          <a className="hover:text-white transition" href="/contact">
-            Contact
-          </a>
-          <div className="hover:text-white transition" href="#">
-            Docs
-          </div>
+            <button
+              onClick={() => navigate("/login")}
+              className="px-4 py-2 rounded-full bg-white text-black"
+            >
+              Sign Up
+            </button>
+          </>
+        ) : (
+          <>
+            {/* LOGGED IN */}
+            <a
+              className="text-violet-200 hover:text-white"
+              href="/create-post"
+            >
+              Create Post
+            </a>
 
-          <button
-            onClick={async () => {
-              await handleLogout();
-              navigate("/");
-            }}
-            className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition"
-          >
-            Logout
-          </button>
+            <a
+              className="text-violet-200 hover:text-white px-4 py-2 rounded-full
+                         bg-gradient-to-r from-violet-600 to-fuchsia-600
+                         text-white"
+              href="/drawing"
+            >
+              Drawing
+            </a>
 
-          <button
-            onClick={() => navigate("/drawing")}
-            className="bg-slate-100 text-black hover:bg-white px-4 py-2 rounded-full text-sm font-medium transition"
-          >
-            Drawing
-          </button>
-        </div>
-      )}
-    </>
+            <button
+              onClick={async () => {
+                await handleLogout();
+                navigate("/");
+              }}
+              className="px-4 py-2 rounded-full border border-violet-500/40 text-violet-200"
+            >
+              Logout
+            </button>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

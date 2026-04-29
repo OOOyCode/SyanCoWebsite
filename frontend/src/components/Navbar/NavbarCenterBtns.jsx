@@ -32,14 +32,6 @@ function NavbarCenterBtns({ user }) {
             </span>
           </a>
 
-          <a href="/docs" class="relative overflow-hidden h-6 group">
-            <span class="block group-hover:-translate-y-full transition-transform duration-300">
-              Docs
-            </span>
-            <span class="block absolute top-full left-0 group-hover:-translate-y-full transition-transform duration-300 text-slate-400">
-              Docs
-            </span>
-          </a>
         </div>
       ) : (
         <div class="hidden bg-blue-400/10 md:flex items-center gap-6 ml-7 centerbtn border p-3 rounded-2xl">
@@ -60,14 +52,6 @@ function NavbarCenterBtns({ user }) {
             </span>
           </a>
 
-          <a href="/docs" class="relative overflow-hidden h-6 group">
-            <span class="block group-hover:-translate-y-full transition-transform duration-300">
-              Docs
-            </span>
-            <span class="block absolute top-full left-0 group-hover:-translate-y-full transition-transform duration-300 text-slate-400">
-              Docs
-            </span>
-          </a>
         </div>
       )}
     </div>
