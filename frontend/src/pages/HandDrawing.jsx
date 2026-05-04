@@ -189,7 +189,7 @@ function HandDrawing() {
         className="absolute top-0 left-0 w-full h-full z-10"
       />
 
-      <div className="absolute flex flex-wrap gap-2 p-2 bg-[#0a0a12] rounded-xl border border-violet-500/30 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+      <div className="absolute flex flex-wrap gap-2 z-50 p-2 bg-[#0a0a12] rounded-xl border border-violet-500/30 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
         <button
           onClick={() => setMode("draw")}
           className="px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white
