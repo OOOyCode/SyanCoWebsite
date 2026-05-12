@@ -75,18 +75,31 @@ function HeroTeam() {
       ]
     },
     {
-      name: "Autre",
-      role: "Fait d'autres trucs",
-      desc: "Minimal and elegant interface enthusiast.",
+      name: "Tursun",
+      role: "Idées",
+      desc: "S'est occupé de trouver des idées",
       img: "",
       listing: [
-        "A désigner les membres du groupe",
-        "A trouver l'idée du projet",
-        "S'est occupé de l'assemblage de la base du robot",
+        "A trouver des idées",
+        "A trouver l'idée du design physique",
+        "S'est occupé de l'assemblage des stylos",
         "S'est occupé de la communication avec les professeurs",
         "Achat du matériel"
       ]
     },
+    {
+      name: "Ghaoui",
+      role: "Design du robot",
+      desc: "S'est occuper de peindre le robot",
+      img: "",
+      listing: [
+        "A mis des autocollants",
+        "A trouver l'idée des dessins",
+        "S'est occupé du pimpage",
+        "S'est occupé de raffiner le robot",
+        "Achat des autocollants"
+      ]
+    }
   ];
 
   return (

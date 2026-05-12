@@ -36,9 +36,9 @@ shadow-lg shadow-[#3c0056]">
             y="55%"
             textAnchor="middle"
             dominantBaseline="middle"
-            className="line"
+            className="line tracking-wider"
           >
-            PROJET OLYMPIADE SI
+            Projet Olympiade SI
           </text>
         </svg>
       </div>

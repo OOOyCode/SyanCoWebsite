@@ -52,7 +52,6 @@ function Posts() {
   return (
     <div className="min-h-screen bg-[#070712] flex flex-col items-center justify-center overflow-hidden relative px-4">
 
-      {/* CAROUSEL */}
       <div className="relative w-full max-w-sm sm:max-w-md md:w-[420px] h-[520px] perspective-[1200px]">
 
         {posts.map((post, i) => {
@@ -72,7 +71,6 @@ function Posts() {
                 zIndex: offset === 0 ? 10 : 1,
               }}
             >
-              {/* CARD */}
               <div className="w-full h-full rounded-2xl
                               bg-[#0c0c18]/80 backdrop-blur-xl
                               border border-violet-500/20
@@ -89,19 +87,12 @@ function Posts() {
                   {post.caption}
                 </p>
 
-                <div className="flex justify-between items-center mt-3">
-                  <button className="text-2xl hover:scale-110 transition">
-                    {post.liked ? "❤️" : "🤍"}
-                  </button>
-                </div>
-
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* NAVIGATION ARROWS (BOTTOM FIXED STYLE) */}
       <div className="flex items-center gap-10 mt-6">
 
         <button

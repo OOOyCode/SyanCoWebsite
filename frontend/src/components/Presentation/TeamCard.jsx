@@ -19,12 +19,6 @@ const TeamCard = ({ person }) => {
       <div className="card__border"></div>
 
       <div className="card_title__container flex flex-wrap">
-        <img
-          src={person.img}
-          alt={person.name}
-          className="w-24 h-24 rounded-full object-cover border-2 border-white/20 shadow-lg mb-4"
-        />
-
         <div>
           <h1 className="name ml-10 mt-10">{person.name}</h1>
           <p className="txt ml-10">{person.desc}</p>
@@ -33,9 +27,9 @@ const TeamCard = ({ person }) => {
 
       <hr className="line" />
 
-      <ul className="card__list">
+      <ul className="card__list ">
         {person.listing.map((item, index) => (
-          <li className="card__list_item " key={index}>
+          <li className="card__list_item justify-items-start text-left" key={index}>
             <span className="check">
               <svg
                 className="check_svg"
